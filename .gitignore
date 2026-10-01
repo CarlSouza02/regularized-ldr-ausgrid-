@@ -1,0 +1,22 @@
+# Julia
+Manifest.toml
+*.cov
+*.mem
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local data downloaded by the notebook
+data_ausgrid/
+
+# Solver logs / temporary files
+*.log
+gurobi.log
+
+# OS / editor
+.DS_Store
+.vscode/
+
+# Large/local copies of papers
+*.pdf
+!presentation/figures/*.pdf
