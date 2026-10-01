@@ -1,0 +1,25 @@
+IND2097 - Regularized Linear Decision Rules
+Ausgrid residential battery experiment
+==================================================
+
+DADOS
+Treino: 2011-07-01 -> 2012-03-12
+Validação: 2012-03-13 -> 2012-05-05
+Teste OOS: 2012-05-06 -> 2012-06-30
+
+REGULARIZAÇÃO
+lambda_rel* = 0.01
+lambda_abs* = 0.05857567560096151
+nnz LDR = 794
+nnz AdaLASSO = 448
+Redução nnz = 43.58%
+
+RESULTADOS OOS
+Sem bateria = AUD 7.6872/dia
+LDR = AUD 5.0289/dia
+AdaLASSO = AUD 5.0163/dia
+Oracle = AUD 4.6406/dia
+
+Redução LDR -> AdaLASSO = 0.25%
+Economia AdaLASSO vs sem bateria = 34.74%
+Gap AdaLASSO vs oracle = 8.10%
