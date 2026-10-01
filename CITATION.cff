@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this seminar experiment, please cite the repository and the main paper."
+title: "Regularized Linear Decision Rules — Ausgrid Battery Experiment"
+type: software
+authors:
+  - family-names: "Souza"
+    given-names: "Carlos"
+year: 2026
