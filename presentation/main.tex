@@ -1,0 +1,3260 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+
+
+% ============================================================
+
+% PACKAGES
+
+% ============================================================
+
+
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[T1]{fontenc}
+
+\usepackage[brazil]{babel}
+
+\usepackage{lmodern}
+
+
+
+\usepackage{graphicx}
+
+\usepackage{booktabs}
+
+\usepackage{tabularx}
+
+\usepackage{array}
+
+\usepackage{tikz}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{ragged2e}
+
+\usepackage{microtype}
+
+\usepackage{multirow}
+
+
+
+\usetikzlibrary{
+
+&#x20;   calc,
+
+&#x20;   arrows.meta,
+
+&#x20;   positioning,
+
+&#x20;   shapes.geometric
+
+}
+
+
+
+\setbeamertemplate{navigation symbols}{}
+
+
+
+\setbeamersize{
+
+&#x20;   text margin left=0.72cm,
+
+&#x20;   text margin right=0.72cm
+
+}
+
+
+
+% ============================================================
+
+% ACADEMIC INFORMATION
+
+% ============================================================
+
+
+
+\newcommand{\graduate}{
+
+Department of Industrial Engineering
+
+}
+
+
+
+\newcommand{\course}{
+
+IND2097 - SPECIAL TOP IN OP RESEARCH - 2026.2
+
+}
+
+
+
+\newcommand{\theme}{
+
+Homework 1 --- Decision Rules
+
+}
+
+
+
+\newcommand{\student}{
+
+Carlos Souza
+
+}
+
+
+
+\newcommand{\registration}{
+
+2612398
+
+}
+
+
+
+\newcommand{\semester}{
+
+3RA --- 2026.2
+
+}
+
+
+
+\newcommand{\prof}{
+
+BRUNO FANZERES DOS SANTOS
+
+}
+
+
+
+\newcommand{\puclogo}{
+
+puc_logo.png
+
+}
+
+
+
+\newcommand{\seminartitle}{
+
+Regularized Linear Decision Rules
+
+}
+
+
+
+\newcommand{\seminarsubtitle}{
+
+A Data-Driven Application to Residential Battery Control
+
+}
+
+
+
+\hypersetup{
+
+&#x20;   pdftitle={
+
+&#x20;       \course\space --- Regularized Linear Decision Rules
+
+&#x20;   },
+
+&#x20;   pdfauthor={
+
+&#x20;       \student
+
+&#x20;   }
+
+}
+
+
+
+% ============================================================
+
+% COLORS
+
+% ============================================================
+
+
+
+\definecolor{mainblue}{RGB}{18,55,135}
+
+\definecolor{darkblue}{RGB}{8,38,100}
+
+\definecolor{accentgold}{RGB}{205,158,10}
+
+
+
+\definecolor{lightgray}{RGB}{242,244,248}
+
+\definecolor{textgray}{RGB}{40,45,55}
+
+
+
+\definecolor{goodgreen}{RGB}{19,111,83}
+
+
+
+\definecolor{softblue}{RGB}{235,241,250}
+
+\definecolor{softgreen}{RGB}{231,245,239}
+
+\definecolor{softgold}{RGB}{250,246,225}
+
+
+
+% ============================================================
+
+% BEAMER STYLE
+
+% ============================================================
+
+
+
+\setbeamercolor{normal text}{
+
+&#x20;   fg=textgray,
+
+&#x20;   bg=white
+
+}
+
+
+
+\setbeamercolor{frametitle}{
+
+&#x20;   fg=mainblue,
+
+&#x20;   bg=white
+
+}
+
+
+
+\setbeamercolor{framesubtitle}{
+
+&#x20;   fg=darkblue,
+
+&#x20;   bg=white
+
+}
+
+
+
+\setbeamerfont{frametitle}{
+
+&#x20;   series=\bfseries,
+
+&#x20;   size=\Large
+
+}
+
+
+
+\setbeamerfont{framesubtitle}{
+
+&#x20;   size=\small
+
+}
+
+
+
+\setbeamerfont{footline}{
+
+&#x20;   size=\scriptsize
+
+}
+
+
+
+\setbeamercolor{block title}{
+
+&#x20;   bg=lightgray,
+
+&#x20;   fg=mainblue
+
+}
+
+
+
+\setbeamercolor{block body}{
+
+&#x20;   bg=lightgray,
+
+&#x20;   fg=textgray
+
+}
+
+
+
+% ============================================================
+
+% FRAME TITLE
+
+% ============================================================
+
+
+
+\setbeamertemplate{frametitle}{%
+
+
+
+\begin{tikzpicture}[remember picture,overlay]
+
+
+
+&#x20;   \fill[mainblue]
+
+&#x20;   (current page.north west)
+
+&#x20;   rectangle ++(0.45,-1.10);
+
+
+
+&#x20;   \node[
+
+&#x20;       white,
+
+&#x20;       font=\bfseries\tiny
+
+&#x20;   ]
+
+&#x20;   at ($(current page.north west)+(0.225,-0.55)$)
+
+&#x20;   {STOR};
+
+
+
+\end{tikzpicture}%
+
+
+
+\vspace{0.12cm}
+
+
+
+\hspace{0.05cm}
+
+\insertframetitle
+
+\par
+
+
+
+\vspace{-0.05cm}
+
+
+
+{
+
+&#x20;   \usebeamerfont{framesubtitle}
+
+&#x20;   \usebeamercolor[fg]{framesubtitle}
+
+
+
+&#x20;   \hspace{0.05cm}
+
+&#x20;   \insertframesubtitle
+
+&#x20;   \par
+
+}
+
+
+
+\vspace{0.15cm}
+
+}
+
+
+
+% ============================================================
+
+% FOOTLINE
+
+% ============================================================
+
+
+
+\setbeamertemplate{footline}{%
+
+
+
+\leavevmode%
+
+
+
+\hbox{%
+
+
+
+\begin{beamercolorbox}[
+
+&#x20;   wd=.72\paperwidth,
+
+&#x20;   ht=2.5ex,
+
+&#x20;   dp=1ex,
+
+&#x20;   leftskip=0.7cm
+
+]{footline}
+
+\end{beamercolorbox}%
+
+
+
+\begin{beamercolorbox}[
+
+&#x20;   wd=.28\paperwidth,
+
+&#x20;   ht=2.5ex,
+
+&#x20;   dp=1ex,
+
+&#x20;   rightskip=0.7cm plus1fil
+
+]{footline}
+
+
+
+\hfill
+
+\insertframenumber/\inserttotalframenumber
+
+
+
+\end{beamercolorbox}
+
+
+
+}
+
+}
+
+
+
+% ============================================================
+
+% CUSTOM BLOCK
+
+% ============================================================
+
+
+
+\newenvironment{blueblock}[1]{%
+
+
+
+\begin{beamercolorbox}[
+
+&#x20;   rounded=true,
+
+&#x20;   shadow=false,
+
+&#x20;   sep=0.15cm,
+
+&#x20;   wd=\linewidth
+
+]{block title}
+
+
+
+\color{mainblue}
+
+\bfseries
+
+\#1
+
+
+
+\end{beamercolorbox}
+
+
+
+\vspace{-0.04cm}
+
+
+
+\begin{beamercolorbox}[
+
+&#x20;   rounded=true,
+
+&#x20;   shadow=false,
+
+&#x20;   sep=0.18cm,
+
+&#x20;   wd=\linewidth,
+
+&#x20;   vmode
+
+]{block body}
+
+
+
+\small
+
+
+
+}{
+
+\end{beamercolorbox}
+
+}
+
+
+
+% ============================================================
+
+% OUTPUT PLACEHOLDER
+
+% If output exists -> show it.
+
+% Otherwise -> presentation still compiles.
+
+% ============================================================
+
+
+
+\newcommand{\resultfig}[2][0.96]{%
+
+
+
+\IfFileExists{graficos/apresentacao/png/#2}
+
+{
+
+&#x20;   \includegraphics[
+
+&#x20;       width=#1\linewidth
+
+&#x20;   ]{graficos/apresentacao/png/#2}
+
+}
+
+{
+
+&#x20;   \fbox{
+
+&#x20;       \parbox[c][0.30\textheight][c]{0.90\linewidth}{
+
+&#x20;           \centering
+
+&#x20;           \small
+
+
+
+&#x20;           Output ainda não gerado.
+
+
+
+&#x20;           \vspace{0.10cm}
+
+
+
+&#x20;           \texttt{graficos/apresentacao/png/#2}
+
+&#x20;       }
+
+&#x20;   }
+
+}
+
+
+
+}
+
+
+
+% ============================================================
+
+% DOCUMENT
+
+% ============================================================
+
+
+
+\begin{document}
+
+
+
+% ============================================================
+
+% CAPA
+
+% ============================================================
+
+
+
+{
+
+\setbeamertemplate{footline}{}
+
+
+
+\begin{frame}[plain]
+
+
+
+\begin{tikzpicture}[remember picture,overlay]
+
+
+
+% Fundo
+
+\fill[white]
+
+(current page.south west)
+
+rectangle
+
+(current page.north east);
+
+
+
+% Área diagonal azul
+
+\fill[mainblue]
+
+($(current page.north east)+(-4.60,0)$)
+
+\--
+
+(current page.north east)
+
+\--
+
+(current page.south east)
+
+\--
+
+($(current page.south east)+(-2.10,0)$)
+
+\-- cycle;
+
+
+
+% Bloco STOR
+
+\fill[mainblue]
+
+($(current page.north west)+(0.55,-0.35)$)
+
+rectangle ++(0.80,-1.25);
+
+
+
+\node[
+
+&#x20;   white,
+
+&#x20;   font=\bfseries\large
+
+]
+
+at ($(current page.north west)+(0.95,-0.98)$)
+
+{STOR};
+
+
+
+% Logo
+
+\node[
+
+&#x20;   anchor=north east,
+
+&#x20;   inner sep=0pt
+
+]
+
+at ($(current page.north east)+(-0.50,-0.42)$)
+
+{
+
+&#x20;   \includegraphics[
+
+&#x20;       height=2.25cm
+
+&#x20;   ]{\puclogo}
+
+};
+
+
+
+% Lateral
+
+\node[
+
+&#x20;   white,
+
+&#x20;   align=center,
+
+&#x20;   font=\bfseries\large
+
+]
+
+at ($(current page.south east)+(-1.45,1.18)$)
+
+{
+
+&#x20;   Decision\\\\
+
+&#x20;   Rules
+
+};
+
+
+
+% Conteúdo
+
+\node[
+
+&#x20;   anchor=north west,
+
+&#x20;   align=left,
+
+&#x20;   text width=10.15cm
+
+]
+
+at ($(current page.north west)+(0.65,-1.62)$)
+
+{%
+
+
+
+{\color{mainblue}
+
+\bfseries
+
+\fontsize{21}{24}\selectfont
+
+Regularized Linear Decision Rules
+
+}
+
+\\\\[0.08cm]
+
+
+
+{\color{darkblue}
+
+\bfseries
+
+\fontsize{13.5}{16}\selectfont
+
+Multistage Stochastic Programming
+
+}
+
+\\\\[0.16cm]
+
+
+
+{\color{textgray}
+
+\small
+
+Based on Nazare \& Street (2023)
+
+}
+
+\\\\[0.28cm]
+
+
+
+{\color{mainblue}
+
+\bfseries
+
+\normalsize
+
+Aplicação prática:
+
+controle de bateria residencial
+
+}
+
+\\\\[0.42cm]
+
+
+
+{\small
+
+\textbf{Student:}
+
+\student
+
+\qquad
+
+\textbf{Registration:}
+
+\registration
+
+}
+
+\\\\[0.12cm]
+
+
+
+{\small
+
+\textbf{Professor:}
+
+\prof
+
+}
+
+\\\\[0.12cm]
+
+
+
+{\small
+
+\textbf{Department:}
+
+\graduate
+
+}
+
+\\\\[0.12cm]
+
+
+
+{\small
+
+\textbf{Course:}
+
+\course
+
+}
+
+\\\\[0.12cm]
+
+
+
+{\small
+
+\textbf{Class / Semester:}
+
+\semester
+
+}
+
+
+
+};
+
+
+
+\end{tikzpicture}
+
+
+
+\end{frame}
+
+
+
+}
+
+
+
+% ============================================================
+
+% SLIDE 1 -- HISTÓRIA
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{O problema}
+
+{uma decisão simples que depende de um futuro incerto !!}
+
+
+
+\begin{center}
+
+
+
+\includegraphics[
+
+&#x20;   width=0.88\linewidth,
+
+&#x20;   height=0.55\textheight,
+
+&#x20;   keepaspectratio
+
+]{casa.png}
+
+
+
+\end{center}
+
+
+
+\vspace{-0.12cm}
+
+
+
+\begin{blueblock}{A situação}
+
+
+
+A cada meia hora, precisamos decidir:
+
+
+
+\\[
+
+\boxed{
+
+\text{usar energia}
+
+\quad
+
+\text{armazenar}
+
+\quad
+
+\text{ou}
+
+\quad
+
+\text{comprar da rede}
+
+}
+
+\\]
+
+
+
+Mas ainda não conhecemos exatamente o consumo
+
+e a geração solar das próximas horas.
+
+
+
+\end{blueblock}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 2 -- MOTIVAÇÃO
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Por que esse problema é difícil?}
+
+{uma decisão agora altera as opções disponíveis depois}
+
+
+
+\small
+
+\abovedisplayskip=4pt
+
+\belowdisplayskip=4pt
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.47\textwidth}
+
+
+
+\begin{blueblock}{Hoje}
+
+
+
+Às 10h observamos:
+
+
+
+\\[
+
+GC\_{10},
+
+\qquad
+GG\_{10},
+
+\qquad
+
+B\_{10}.
+
+\\]
+
+
+
+Precisamos decidir quanto:
+
+
+
+\\[
+
+\text{carregar},
+
+\qquad
+
+\text{descarregar}.
+
+\\]
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.49\textwidth}
+
+
+
+\begin{blueblock}{Amanhã... ou daqui a algumas horas}
+
+
+
+A decisão atual modifica:
+
+
+
+\\[
+
+B\_{11},
+
+B\_{12},
+
+\ldots
+
+\\]
+
+
+
+e portanto altera as decisões
+
+que estarão disponíveis no futuro.Além disso,
+
+
+
+\\[
+
+GC\_{t+1},
+
+GG\_{t+1}
+
+\\]
+
+
+
+ainda são incertos.
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\vspace{0.14cm}
+
+
+
+\begin{beamercolorbox}[
+
+&#x20;   rounded=true,
+
+&#x20;   sep=0.16cm
+
+]{block body}
+
+
+
+\centering
+
+
+
+\large
+
+\color{mainblue}
+
+\bfseries
+
+
+
+Como tomar boas decisões hoje
+
+sem conhecer exatamente o futuro?
+
+
+
+\end{beamercolorbox}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 3 -- PONTE PARA TEORIA
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Da história para a matemática}
+
+{o problema pode ser interpretado como um problema de programação matemática multiestágio}
+
+
+
+\begin{center}
+
+
+
+\begin{tikzpicture}[
+
+&#x20;   \>=Latex,
+
+&#x20;   node distance=0.55cm,
+
+&#x20;   every node/.style={
+
+&#x20;       align=center,
+
+&#x20;       font=\small
+
+&#x20;   }
+
+]
+
+
+
+\node[
+
+&#x20;   draw=mainblue,
+
+&#x20;   fill=softblue,
+
+&#x20;   rounded corners,
+
+&#x20;   minimum width=2.0cm,
+
+&#x20;   minimum height=0.8cm
+
+] (x1)
+
+{
+
+Decisão\\\\
+
+$x_1$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=accentgold,
+
+&#x20;   fill=softgold,
+
+&#x20;   circle,
+
+&#x20;   right=of x1,
+
+&#x20;   minimum size=1.05cm
+
+] (xi2)
+
+{
+
+$\xi_2$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=mainblue,
+
+&#x20;   fill=softblue,
+
+&#x20;   rounded corners,
+
+&#x20;   right=of xi2,
+
+&#x20;   minimum width=2.0cm,
+
+&#x20;   minimum height=0.8cm
+
+] (x2)
+
+{
+
+Decisão\\\\
+
+$x_2$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=accentgold,
+
+&#x20;   fill=softgold,
+
+&#x20;   circle,
+
+&#x20;   right=of x2,
+
+&#x20;   minimum size=1.05cm
+
+] (xi3)
+
+{
+
+$\xi_3$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=mainblue,
+
+&#x20;   fill=softblue,
+
+&#x20;   rounded corners,
+
+&#x20;   right=of xi3,
+
+&#x20;   minimum width=2.0cm,
+
+&#x20;   minimum height=0.8cm
+
+] (x3)
+
+{
+
+Decisão\\\\
+
+$x_3$
+
+};
+
+
+
+\node[
+
+&#x20;   right=0.55cm of x3
+
+]
+
+{
+
+$\cdots$
+
+};
+
+
+
+\draw[->,thick] (x1) -- (xi2);
+
+\draw[->,thick] (xi2) -- (x2);
+
+\draw[->,thick] (x2) -- (xi3);
+
+\draw[->,thick] (xi3) -- (x3);
+
+
+
+\end{tikzpicture}
+
+
+
+\end{center}
+
+
+
+\vspace{0.25cm}
+
+
+
+\begin{blueblock}{Política de decisão}
+
+
+
+No instante $t$, usamos apenas a informação
+
+que já foi observada:
+
+
+
+\\[
+
+\boxed{
+
+x_t
+
+\=
+
+\pi_t(
+
+\xi_1,\ldots,\xi_t
+
+)
+
+}
+
+\\]
+
+
+
+Essa condição é chamada de
+
+\textbf{não antecipatividade}.
+
+
+
+\end{blueblock}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 4 -- TEORIA DO PAPER
+
+% ============================================================
+
+
+
+\begin{frame}[shrink=12]
+
+{Base teórica do artigo}
+
+{do problema multiestágio à regra de decisão linear}
+
+
+
+\small
+
+\abovedisplayskip=4pt
+
+\belowdisplayskip=4pt
+
+
+
+\begin{blueblock}{Problema}
+
+
+
+Queremos tomar decisões sequenciais sob incerteza:
+
+
+
+\\[
+
+\boxed{
+
+x_t = \pi_t(\xi_1,\ldots,\xi_t)
+
+}
+
+\\]
+
+
+
+onde $x_t$ é a decisão no estágio $t$ e
+
+$\xi_1,\ldots,\xi_t$ representam as informações observadas até $t$.
+
+
+
+\end{blueblock}
+
+
+
+\vspace{0.06cm}
+
+
+
+\begin{blueblock}{Dificuldade}
+
+
+
+Encontrar diretamente a política $\pi_t(\cdot)$ é difícil.
+
+
+
+Então o artigo aproxima essa política por uma
+
+\textbf{Linear Decision Rule (LDR)}:
+
+
+
+\\[
+
+\boxed{
+
+x_t =
+
+\sum_k
+
+\phi_k(\xi\_{1:t})\\,\theta\_{t,k}
+
+}
+
+\\]
+
+
+
+A ideia é substituir uma política geral por uma regra parametrizada
+
+pelos coeficientes $\theta$.
+
+
+
+\end{blueblock}
+
+
+
+\vspace{0.06cm}
+
+
+
+\centering
+
+\small
+
+A vantagem é que o problema fica mais tratável computacionalmente.
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 5 -- ADALASSO
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Problema central do artigo}
+
+{overfitting e regularização via AdaLASSO}
+
+
+
+\small
+
+\abovedisplayskip=3pt
+
+\belowdisplayskip=3pt
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.44\textwidth}
+
+
+
+\begin{blueblock}{Risco de overfitting}
+
+
+
+Se o número de coeficientes da LDR for grande em relação ao número de cenários de treino,
+
+
+
+\\[
+
+\boxed{
+
+p = \\#\theta \approx N
+
+}
+
+\\]
+
+
+
+então a política pode ajustar muito bem os dados de treino,
+
+mas apresentar baixo desempenho fora da amostra.
+
+
+
+\\[
+
+\boxed{
+
+p \approx N
+
+\\;\Longrightarrow\\;
+
+\text{overfitting}
+
+}
+
+\\]
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.52\textwidth}
+
+
+
+\begin{blueblock}{Solução proposta no artigo}
+
+
+
+\footnotesize
+
+
+
+O artigo adiciona regularização AdaLASSO:
+
+
+
+\\[
+
+\boxed{
+
+\min\_{\theta}
+
+\\; C\_{\mathrm{train}}(\theta)
+
+\+
+
+\lambda
+
+\sum_j
+
+\frac{|\theta_j|}{|\theta_j^{(0)}|}
+
+}
+
+\\]
+
+
+
+onde:
+
+
+
+\begin{itemize}\itemsep1pt\parsep0pt\topsep2pt
+
+&#x20;   \item $C\_{\mathrm{train}}(\theta)$: custo no treinamento;
+
+&#x20;   \item $\lambda$: intensidade da penalização;
+
+&#x20;   \item $\theta^{(0)}$: coeficientes da LDR sem regularização.
+
+\end{itemize}
+
+
+
+A meta é obter uma política mais simples e com melhor desempenho OOS.
+
+
+
+\vspace{0.05cm}
+
+\centering
+
+$
+
+\boxed{
+
+\text{LDR simples}
+
+\\;\Rightarrow\\;
+
+\text{melhor generalização?}
+
+}
+
+$
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% PONTE -- PAPER E EXPERIMENTO
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Do paper X nosso experimento}
+
+{a mesma lógica em um problema diferente}
+
+
+
+\small
+
+\abovedisplayskip=3pt
+
+\belowdisplayskip=3pt
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.51\textwidth}
+
+
+
+\begin{blueblock}{Equivalência entre os problemas}
+
+
+
+\centering
+
+\scriptsize
+
+\renewcommand{\arraystretch}{1.18}
+
+
+
+\begin{tabular}{@{}lcl@{}}
+
+\toprule
+
+\textbf{Paper} & & \textbf{Ausgrid} \\\\
+
+\midrule
+
+Reservatório & $\leftrightarrow$ & Bateria \\\\
+
+Água armazenada & $\leftrightarrow$ & $B_t$ \\\\
+
+Afluência & $\leftrightarrow$ & $GC_t-GG_t$ \\\\
+
+Turbinamento & $\leftrightarrow$ & descarga \\\\
+
+Geração térmica & $\leftrightarrow$ & compra da rede \\\\
+
+Custo térmico & $\leftrightarrow$ & conta de energia \\\\
+
+\bottomrule
+
+\end{tabular}
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.45\textwidth}
+
+
+
+\begin{blueblock}{Como usamos a LDR aqui}
+
+
+
+\footnotesize
+
+No paper, a LDR define um estado-alvo para o reservatório.
+
+
+
+No nosso caso, ela define um estado-alvo para a bateria:
+
+
+
+\\[
+
+\boxed{
+
+B_t^{\text{target}}
+
+\=
+
+\theta\_{t0}
+
+\+
+
+\sum\_{\ell,k}
+
+\theta\_{t\ell k}\\,z\_{t-\ell}^{\\,k}
+
+}
+
+\\]
+
+
+
+onde $z\_{t-\ell}$ representa informações recentes da carga líquida.
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\vspace{0.12cm}
+
+
+
+\begin{beamercolorbox}[
+
+&#x20;   rounded=true,
+
+&#x20;   sep=0.18cm,
+
+&#x20;   wd=\linewidth
+
+]{block body}
+
+
+
+\centering
+
+\small
+
+\textbf{Em português:}\quad
+
+\emph{“Olhando o consumo e a geração solar recentes,
+
+quanto de energia eu gostaria de ter guardado na bateria agora?”}
+
+
+
+\end{beamercolorbox}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 6 -- METODOLOGIA
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Nossa metodologia}
+
+{dados reais do Ausgrid + bateria simulada}
+
+
+
+\begin{center}
+
+
+
+\begin{tikzpicture}[
+
+&#x20;   \>=Latex,
+
+&#x20;   node distance=0.28cm,
+
+&#x20;   every node/.style={
+
+&#x20;       align=center,
+
+&#x20;       font=\scriptsize
+
+&#x20;   }
+
+]
+
+
+
+\node[
+
+&#x20;   draw=mainblue,
+
+&#x20;   fill=softblue,
+
+&#x20;   rounded corners,
+
+&#x20;   minimum width=1.55cm,
+
+&#x20;   minimum height=0.80cm
+
+] (data)
+
+{
+
+Ausgrid\\\\
+
+$GC_t,GG_t$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=mainblue,
+
+&#x20;   fill=softblue,
+
+&#x20;   rounded corners,
+
+&#x20;   right=of data,
+
+&#x20;   minimum width=1.55cm,
+
+&#x20;   minimum height=0.80cm
+
+] (net)
+
+{
+
+Carga líquida\\\\
+
+$L_t=GC_t-GG_t$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=mainblue,
+
+&#x20;   fill=softblue,
+
+&#x20;   rounded corners,
+
+&#x20;   right=of net,
+
+&#x20;   minimum width=1.55cm,
+
+&#x20;   minimum height=0.80cm
+
+] (train)
+
+{
+
+Treino\\\\
+
+LDR
+
+};
+
+
+
+\node[
+
+&#x20;   draw=goodgreen,
+
+&#x20;   fill=softgreen,
+
+&#x20;   rounded corners,
+
+&#x20;   right=of train,
+
+&#x20;   minimum width=1.65cm,
+
+&#x20;   minimum height=0.80cm
+
+] (ada)
+
+{
+
+AdaLASSO\\\\
+
+vários $\lambda$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=accentgold,
+
+&#x20;   fill=softgold,
+
+&#x20;   rounded corners,
+
+&#x20;   right=of ada,
+
+&#x20;   minimum width=1.55cm,
+
+&#x20;   minimum height=0.80cm
+
+] (val)
+
+{
+
+Validação\\\\
+
+$\lambda^\star$
+
+};
+
+
+
+\node[
+
+&#x20;   draw=goodgreen,
+
+&#x20;   fill=softgreen,
+&#x20;   rounded corners,
+
+&#x20;   right=of val,
+
+&#x20;   minimum width=1.55cm,
+
+&#x20;   minimum height=0.80cm
+
+] (test)
+
+{
+
+Teste\\\\
+
+OOS
+
+};
+
+
+
+\draw[->,thick] (data) -- (net);
+
+\draw[->,thick] (net) -- (train);
+
+\draw[->,thick] (train) -- (ada);
+
+\draw[->,thick] (ada) -- (val);
+
+\draw[->,thick] (val) -- (test);
+
+
+
+\end{tikzpicture}
+
+
+
+\end{center}
+
+
+
+\vspace{0.32cm}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.47\textwidth}
+
+
+
+\begin{blueblock}{Dados}
+
+
+
+\\[
+
+GC_t
+
+\=
+
+\text{consumo}
+
+\\]
+
+
+
+\\[
+
+GG_t
+
+\=
+
+\text{geração solar}
+
+\\]
+
+
+
+\\[
+
+L_t
+
+\=
+
+GC_t-GG_t.
+
+\\]
+
+
+
+Cada dia possui:
+
+
+
+\\[
+
+T=48
+
+\\]
+
+
+
+períodos de 30 minutos.
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.49\textwidth}
+
+
+
+\begin{blueblock}{Avaliação}
+
+
+
+Escolhemos:
+
+
+
+\\[
+
+\boxed{
+
+\lambda^\star
+
+\=
+
+\arg\min\_\lambda
+
+C\_{\mathrm{val}}(\lambda)
+
+}
+
+\\]
+
+
+
+e só depois comparamos
+
+as políticas no teste OOS.
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 7 -- MODELO BATERIA
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Modelo da bateria}
+
+{estado, controle e função objetivo}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.48\textwidth}
+
+
+
+\begin{blueblock}{Estado}
+
+
+
+A energia armazenada evolui como:
+
+
+
+\\[
+
+\boxed{
+
+B_t
+
+\=
+
+B\_{t-1}
+
+\+
+
+\eta_c c_t
+
+\-
+
+\frac{d_t}{\eta_d}
+
+}
+
+\\]
+
+
+
+onde:
+
+
+
+\\[
+
+c_t=\text{carga},
+
+\qquad
+
+d_t=\text{descarga}.
+
+\\]
+
+
+
+Com:
+
+
+
+\\[
+
+0\leq B_t\leq B\_{\max}.
+
+\\]
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.48\textwidth}
+
+
+
+\begin{blueblock}{Objetivo}
+
+
+
+A energia comprada da rede é:
+
+
+
+\\[
+
+G_t.
+
+\\]
+
+
+
+Queremos minimizar:
+
+
+
+\\[
+
+\boxed{
+
+\min
+
+\mathbb E
+
+\left[
+
+\sum\_{t=1}^{T}
+
+p_tG_t
+
+\right]
+
+}
+
+\\]
+
+
+
+respeitando todas as restrições
+
+físicas da bateria.
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 8 -- IMPLEMENTAÇÃO
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Implementação}
+
+{Julia, JuMP e Gurobi}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.42\textwidth}
+
+
+
+\begin{blueblock}{Tecnologias}
+
+
+
+\begin{center}
+
+
+
+{\Large
+
+\textbf{Julia}
+
+}
+
+
+
+\\[
+
+\Downarrow
+
+\\]
+
+
+
+{\Large
+
+\textbf{JuMP}
+
+}
+
+
+
+\\[
+
+\Downarrow
+
+\\]
+
+
+
+{\Large
+
+\textbf{Gurobi}
+
+}
+
+
+
+\end{center}
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.54\textwidth}
+
+
+
+\begin{blueblock}{Rotina experimental}
+
+
+
+\begin{enumerate}
+
+
+
+&#x20;   \item Estimar LDR sem regularização;
+
+
+
+&#x20;   \item calcular pesos AdaLASSO;
+
+
+
+&#x20;   \item resolver o modelo para vários $\lambda$;
+
+
+
+&#x20;   \item escolher $\lambda^\star$ na validação;
+
+
+
+&#x20;   \item avaliar LDR e AdaLASSO
+
+&#x20;   na mesma amostra OOS.
+
+
+
+\end{enumerate}
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 9 -- RESULTADO 1
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Resultados}
+
+{o que acontece quando aumentamos a regularização?}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.49\textwidth}
+
+
+
+\centering
+
+
+
+\resultfig{fig_06_treino_vs_validacao.png}
+
+
+
+\vspace{0.05cm}
+
+
+
+\scriptsize
+
+Custo no treino e validação para diferentes valores de $\lambda$.
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.49\textwidth}
+
+
+
+\centering
+
+
+
+\resultfig{fig_03_parcimonia_coeficientes.png}
+
+
+
+\vspace{0.05cm}
+
+
+
+\scriptsize
+
+Número de coeficientes não nulos da política.
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\vspace{0.15cm}
+
+
+
+\begin{blueblock}{Pergunta}
+
+
+
+A redução da complexidade da política
+
+também melhora seu desempenho fora da amostra?
+
+
+
+\end{blueblock}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 10 -- RESULTADO OOS
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Desempenho fora da amostra}
+
+{LDR versus AdaLASSO-LDR}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.49\textwidth}
+
+
+
+\centering
+
+
+
+\resultfig{fig_04_distribuicao_custos_oos.png}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.49\textwidth}
+
+
+
+\centering
+
+
+
+\resultfig{fig_07_custo_medio_oos.png}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\vspace{0.15cm}
+
+
+
+\begin{blueblock}{Interpretação}
+
+
+
+O resultado principal não deve ser julgado
+
+pelo custo obtido no treinamento,
+
+mas pelo comportamento da política
+
+em dias que não foram utilizados para estimá-la.
+
+
+
+\end{blueblock}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 11 -- OUTPUT OPERACIONAL
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{O que a política realmente faz?}
+
+{interpretação operacional da bateria}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.59\textwidth}
+
+
+
+\centering
+
+
+
+\resultfig[0.98]{fig_05_trajetoria_bateria.png}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.37\textwidth}
+
+
+
+\begin{blueblock}{Leitura}
+
+
+
+A política determina
+
+um estado-alvo:
+
+
+
+\\[
+
+B_t^{target}.
+
+\\]
+
+
+
+A bateria então:
+
+
+
+\begin{itemize}
+
+
+
+&#x20;   \item armazena energia em alguns períodos;
+
+
+
+&#x20;   \item descarrega em outros;
+
+
+
+&#x20;   \item reduz ou desloca compras da rede.
+
+
+
+\end{itemize}
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 12 -- PAPER BENCHMARK
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Ligação com os resultados do artigo}
+
+{o que Nazare \& Street encontraram}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.47\textwidth}
+
+
+
+\begin{blueblock}{Custo OOS}
+
+
+
+No primeiro estudo de caso:
+
+
+
+\\[
+
+C\_{\mathrm{LDR}}
+
+\=
+
+2.00\text{ M\\$}
+
+\\]
+
+
+
+e, com regularização:
+
+
+
+\\[
+
+C\_{\mathrm{Ada}}
+
+\=
+
+1.63\text{ M\\$}.
+
+\\]
+
+
+
+Redução:
+
+
+
+\\[
+
+\boxed{
+
+18.5\\%
+
+}
+
+\\]
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.49\textwidth}
+
+
+
+\begin{blueblock}{Parcimônia}
+
+
+
+Coeficientes não nulos:
+
+
+
+\\[
+
+45.0\\%
+
+\\]
+
+
+
+sem regularização,
+
+
+
+\\[
+
+\Downarrow
+
+\\]
+
+
+
+\\[
+
+5.1\\%
+
+\\]
+
+
+
+na política escolhida.
+
+
+
+Redução:
+
+
+
+\\[
+
+\boxed{
+
+88.6\\%
+
+}
+
+\\]
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\vspace{0.15cm}
+
+
+
+\centering
+
+\scriptsize
+
+
+
+Fonte: Nazare \& Street (2023).
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% SLIDE 13 -- FUTUROS PASSOS
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Próximos passos}
+
+{como expandir o experimento}
+
+
+
+\begin{columns}[T,totalwidth=\textwidth]
+
+
+
+\begin{column}{0.48\textwidth}
+
+
+
+\begin{blueblock}{Dados}
+
+
+
+\begin{itemize}
+
+
+
+&#x20;   \item utilizar os três anos completos do Ausgrid;
+
+
+
+&#x20;   \item repetir o experimento
+
+&#x20;   para várias residências;
+
+
+
+&#x20;   \item avaliar diferentes perfis
+
+&#x20;   de consumo e geração solar.
+
+
+
+\end{itemize}
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\begin{column}{0.48\textwidth}
+
+
+
+\begin{blueblock}{Modelo}
+
+
+
+\begin{itemize}
+
+
+
+&#x20;   \item utilizar tarifas reais;
+
+
+
+&#x20;   \item testar outras capacidades de bateria;
+
+
+
+&#x20;   \item comparar com outros métodos,
+&#x20;   como SDDP ou políticas alternativas.
+
+
+
+\end{itemize}
+
+
+
+\end{blueblock}
+
+
+
+\end{column}
+
+
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% CONCLUSÃO
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Mensagem final}
+
+{decidir bem não significa apenas ajustar bem o treinamento}
+
+
+
+\begin{center}
+
+
+
+\vspace{0.35cm}
+
+
+
+\\[
+
+\boxed{
+
+\text{Decisão sob incerteza}
+
+}
+
+\\]
+
+
+
+\\[
+
+\Downarrow
+
+\\]
+
+
+
+\\[
+
+\boxed{
+
+\text{Linear Decision Rules}
+
+}
+
+\\]
+
+
+
+\\[
+
+\Downarrow
+
+\\]
+
+
+
+\\[
+
+\boxed{
+
+\text{Regularização}
+
+}
+
+\\]
+
+
+
+\\[
+
+\Downarrow
+
+\\]
+
+
+
+\\[
+
+\boxed{
+
+\text{Generalização OOS}
+
+}
+
+\\]
+
+
+
+\vspace{0.35cm}
+
+
+
+\begin{beamercolorbox}[
+
+&#x20;   rounded=true,
+
+&#x20;   sep=0.30cm,
+
+&#x20;   wd=0.86\textwidth
+
+]{block body}
+
+
+
+\centering
+
+
+
+\Large
+
+\color{mainblue}
+
+\bfseries
+
+
+
+Uma política que usa menos parâmetros
+
+pode tomar decisões melhores
+
+em situações que nunca observou?
+
+
+
+\end{beamercolorbox}
+
+
+
+\end{center}
+
+
+
+\end{frame}
+
+
+
+% ============================================================
+
+% REFERENCES
+
+% ============================================================
+
+
+
+\begin{frame}
+
+{Referências}
+
+{}
+
+
+
+\small
+
+
+
+\begin{thebibliography}{9}
+
+
+
+\bibitem{nazare2023}
+
+F. Nazare and A. Street.
+
+
+
+\newblock
+
+\textit{Solving Multistage Stochastic Linear Programming via
+
+Regularized Linear Decision Rules:
+
+An Application to Hydrothermal Dispatch Planning}.
+
+
+
+\newblock
+
+European Journal of Operational Research,
+
+309, 345--358, 2023.
+
+
+
+
+
+\bibitem{bodur2018}
+
+M. Bodur and J. Luedtke.
+
+
+
+\newblock
+
+\textit{Two-Stage Linear Decision Rules
+
+for Multi-Stage Stochastic Programming}.
+
+
+
+
+
+\bibitem{zou2006}
+
+H. Zou.
+
+
+
+\newblock
+
+\textit{The Adaptive Lasso and Its Oracle Properties}.
+
+
+
+\newblock
+
+Journal of the American Statistical Association,
+
+2006\.
+
+
+
+\end{thebibliography}
+
+
+
+\end{frame}
+
+
+
+\end{document}
